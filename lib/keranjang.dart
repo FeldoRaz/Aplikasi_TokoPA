@@ -5,7 +5,7 @@ class MyKeranjang extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      appBar: AppBar(title: const Text('Keranjang')),
+      appBar: AppBar(title: const Text('Keranjangku')),
       body: Container(),
     );
   }
