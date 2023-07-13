@@ -101,7 +101,7 @@ class _BerandaPageState extends State<BerandaPage> {
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.blue,
               ),
@@ -114,7 +114,7 @@ class _BerandaPageState extends State<BerandaPage> {
               ),
             ),
             ListTile(
-              leading: Icon(Icons.settings),
+              leading: const Icon(Icons.settings),
               title: Text('Pengaturan'),
               onTap: () {
                 // Aksi ketika menu pengaturan dipilih
