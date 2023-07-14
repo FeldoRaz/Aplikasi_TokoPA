@@ -29,6 +29,7 @@ class BerandaPage extends StatefulWidget {
 }
 
 class _BerandaPageState extends State<BerandaPage> {
+ 
   int _selectedIndex = 0;
 
   List<Widget> _widgetOptions = [
@@ -37,6 +38,8 @@ class _BerandaPageState extends State<BerandaPage> {
     Text('Keranjang'),
     Text('Akun'),
   ];
+
+
 
   void _onItemTapped(int index) {
     setState(() {
@@ -140,6 +143,12 @@ class _BerandaPage extends State<BerandaPage> {
   int _counter = 0;
   int total = 0;
   var dataJson;
+   void initState() {
+    _getDataFromStrapi();
+    // TODO: implement initState
+    
+    super.initState();
+  }
 
   void _getDataFromStrapi() async {
     var response =
