@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:aplikasi_toko/keranjang.dart';
 import 'package:aplikasi_toko/login.dart';
 import 'package:flutter/material.dart';
@@ -137,41 +138,35 @@ class _BerandaPageState extends State<BerandaPage> {
 
 class _BerandaPage extends State<BerandaPage> {
   int _counter = 0;
+  int total = 0;
+  var dataJson;
 
-
-void _incrementCounter() {
-  setState(() {
-      _counter++;
+  void _getDataFromStrapi() async {
+    var response =
+        await http.get(Uri.parse("http://localhost:1337/api/barangs"));
+    dataJson = await jsonDecode(response.body);
+    print(dataJson["meta"]["pagination"]["total"]);
+    setState(() {
+      total = dataJson["meta"]["pagination"]["total"];
     });
   }
 
-@override
+  @override
   Widget build(BuildContext context) {
-     return Scaffold(
-      appBar: AppBar(
-         backgroundColor: Theme.of(context).colorScheme.inversePrimary
-      ),
-      body: Center(
-        child: Column(
-         mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
+    _getDataFromStrapi();
+    return Scaffold(
+      appBar:
+          AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary),
+      body: ListView.builder(
+          itemCount: 5,
+          itemBuilder: (index, context) {
+            return ListTile(title: Text("Hello"),);
+          }),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: _getDataFromStrapi,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
-  
 }
