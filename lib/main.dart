@@ -158,9 +158,20 @@ class _BerandaPage extends State<BerandaPage> {
       appBar:
           AppBar(backgroundColor: Theme.of(context).colorScheme.inversePrimary),
       body: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (index, context) {
-            return ListTile(title: Text("Hello"),);
+          itemCount: total,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(dataJson["data"][index]["attributes"]["nama_barang"]),
+              leading: Icon(Icons.add_shopping_cart_sharp),
+              trailing: IconButton(
+                  onPressed: () async {
+                    var id = dataJson["data"][index]["id"];
+                    var response = await http.delete(
+                        Uri.parse("http://localhost:1337/api/barangs/$id"));
+                    _getDataFromStrapi();
+                  },
+                  icon: Icon(Icons.delete)),
+            );
           }),
       floatingActionButton: FloatingActionButton(
         onPressed: _getDataFromStrapi,
